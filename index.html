@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrediLink – Smart Credit. Real Opportunity.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+    header { background:#2C7BE5; color:#fff; padding:2rem; text-align:center; }
+    header h1 { margin:0; font-size:2.5rem; }
+    .hero { padding:3rem 1rem; text-align:center; }
+    .hero h2 { color:#2C7BE5; font-size:1.75rem; }
+    .cta-button { background:#5DD39E; color:#fff; padding:1rem 2rem; border:none; border-radius:8px; font-size:1rem; cursor:pointer; margin-top:1rem; }
+    .section { padding:2rem 1rem; max-width:700px; margin:0 auto; }
+    .form-group { margin-bottom:1rem; }
+    input, select { width:100%; padding:0.75rem; margin-top:0.25rem; border:1px solid #ccc; border-radius:6px; }
+    .result-box { background:#e7f5ff; padding:1rem; margin-top:1rem; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CrediLink</h1>
+    <p>Smart Credit. Real Opportunity.</p>
+  </header>
+
+  <div class="hero">
+    <h2>Discover Your Credit Potential</h2>
+    <p>Our AI-powered system understands more than just your credit history.</p>
+    <button class="cta-button" onclick="document.getElementById('checker').scrollIntoView({ behavior: 'smooth' })">Get My Score</button>
+  </div>
+
+  <section class="section" id="checker">
+    <h3>CrediScore AI™ Eligibility Check</h3>
+    <form id="creditForm">
+      <div class="form-group">
+        <label>Employment Status</label>
+        <select id="employment">
+          <option value="employed">Employed</option>
+          <option value="self">Self-employed</option>
+          <option value="student">Student</option>
+          <option value="unemployed">Unemployed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Monthly Income (SGD)</label>
+        <input type="number" id="income" />
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <select id="country">
+          <option value="sg">Singapore</option>
+          <option value="lk">Sri Lanka</option>
+          <option value="ph">Philippines</option>
+          <option value="in">India</option>
+        </select>
+      </div>
+      <button type="button" class="cta-button" onclick="checkScore()">Check My Eligibility</button>
+    </form>
+
+    <div class="result-box" id="result" style="display: none;"></div>
+  </section>
+
+  <script>
+    function checkScore() {
+      const employment = document.getElementById('employment').value;
+      const income = parseInt(document.getElementById('income').value);
+      const country = document.getElementById('country').value;
+
+      let score = 0;
+      if (employment === "employed" || employment === "self") score += 30;
+      else if (employment === "student") score += 15;
+      if (income > 3000) score += 40;
+      else if (income > 1500) score += 25;
+      else score += 10;
+      if (country === "sg") score += 20;
+      else score += 10;
+
+      let msg = "";
+      if (score > 70) msg = "✅ You're eligible for up to <strong>$1,200 SGD</strong> in flexible credit with CrediLink. Let's take the next step.";
+      else if (score > 50) msg = "You're pre-qualified for a starter credit limit. We'll help you grow it fast.";
+      else msg = "We see your potential. Let's work together to build your credit step by step.";
+
+      const box = document.getElementById('result');
+      box.style.display = 'block';
+      box.innerHTML = msg;
+    }
+  </script>
+</body>
+</html>
